@@ -88,7 +88,7 @@ Example 3 - Print instructions on generating the CSR manually
 $ ./certreq.py -m -k key1.pem -cn www.example.com -e 'admin@example.com' -o 'Example Co' -l 'New York' -s NY -c US -san www.example.com,apps.example.com -ou External -ou WWW
 
 1. Create openssl.cfg file with the following content
-$ cat > openssl.cfg
+$ cat > openssl.cfg <<EOT
 [ req ]
 distinguished_name      = req_distinguished_name
 string_mask = utf8only
@@ -114,6 +114,8 @@ extendedKeyUsage=serverAuth,clientAuth
 [ alt_names ]
 DNS.1=www.example.com
 DNS.2=apps.example.com
+
+EOT
 
 
 2. Execute the following command
