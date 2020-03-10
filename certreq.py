@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import ipaddress
 import logging
-import json
 import sys
 import argparse
 import re
