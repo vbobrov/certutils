@@ -43,7 +43,7 @@ optional arguments:
 Example 1 - Generate a new key and a new CSR interactively
 
 ```
-$ ./certreq.py --newkey key1.pem 2048
+$ ./certreq.py -n key1.pem 2048
 Please enter information about the request.
 Empty string to skip the value
 Common Name (CN): www.example.com
@@ -69,6 +69,53 @@ MIIDWzCCAkMCAQAwgZ8xGDAWBgNVBAMMD3d3dy5leGFtcGxlLmNvbTEgMB4GCSqG
 -----END CERTIFICATE REQUEST-----
 ```
 
-Example 1 - Generate a CSR from command line using an existing key
+Example 2 - Generate a CSR from command line using an existing key
 
+```
+$ ./certreq.py -k key1.pem -cn www.example.com -e 'admin@example.com' -o 'Example Co' -l 'New York' -s NY -c US -san www.example.com,apps.example.com -ou External -ou WWW
+
+Enter pass phrase for key1.pem:
+-----BEGIN CERTIFICATE REQUEST-----
+MIIDWzCCAkMCAQAwgZ8xGDAWBgNVBAMMD3d3dy5leGFtcGxlLmNvbTEgMB4GCSqG
+------------------------------- snip ---------------------------
+i/hybsQTG9hTtX5kWnqml+x95Zyy/s4Y+C5eyvq0mN/Wkh3C1FDFzZYiW3RRfpU=
+-----END CERTIFICATE REQUEST-----
+```
+
+Example 3 - Print instructions on manually generating the CSR manually
+
+```
+$ ./certreq.py -m -k key1.pem -cn www.example.com -e 'admin@example.com' -o 'Example Co' -l 'New York' -s NY -c US -san www.example.com,apps.example.com -ou External -ou WWW
+
+1. Create openssl.cfg file with the following content
+$ cat > openssl.cfg
+[ req ]
+distinguished_name      = req_distinguished_name
+string_mask = utf8only
+prompt=no
+req_extensions = v3_req
+
+[ req_distinguished_name ]
+commonName=www.example.com
+emailAddress=admin@example.com
+0.organizationalUnitName=External
+1.organizationalUnitName=WWW
+organizationName=Example Co
+localityName=New York
+stateOrProvinceName=NY
+countryName=US
+
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName = @alt_names
+extendedKeyUsage=serverAuth,clientAuth
+
+[ alt_names ]
+DNS.1=www.example.com
+DNS.2=apps.example.com
+
+
+2. Execute the following command
+$ openssl req -text -config openssl.cfg -key key1.pem -new
 ```
