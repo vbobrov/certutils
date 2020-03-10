@@ -82,7 +82,7 @@ i/hybsQTG9hTtX5kWnqml+x95Zyy/s4Y+C5eyvq0mN/Wkh3C1FDFzZYiW3RRfpU=
 -----END CERTIFICATE REQUEST-----
 ```
 
-Example 3 - Print instructions on manually generating the CSR manually
+Example 3 - Print instructions on generating the CSR manually
 
 ```
 $ ./certreq.py -m -k key1.pem -cn www.example.com -e 'admin@example.com' -o 'Example Co' -l 'New York' -s NY -c US -san www.example.com,apps.example.com -ou External -ou WWW
