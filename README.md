@@ -82,7 +82,18 @@ i/hybsQTG9hTtX5kWnqml+x95Zyy/s4Y+C5eyvq0mN/Wkh3C1FDFzZYiW3RRfpU=
 -----END CERTIFICATE REQUEST-----
 ```
 
-Example 3 - Print instructions on generating the CSR manually
+Example 3 - Specifying the entire Subject Line
+
+```
+ ./certreq.py -k key1.txt -dn "cn=www.example.com,e=admin@example.com,ou=External,ou=WWW,o=Example Co,l=New York,s=NY,c=US" -san www.example.com,apps.example.com
+-----BEGIN CERTIFICATE REQUEST-----
+MIIDWzCCAkMCAQAwgZ8xGDAWBgNVBAMMD3d3dy5leGFtcGxlLmNvbTEgMB4GCSqG
+------------------------------- snip ---------------------------
+/sOX3KRxMA2onvXN/qoASZjwKTSD1idYVrfqnsXpDdkIcHBdN+LryBbdbRKQ6sg=
+-----END CERTIFICATE REQUEST-----
+```
+
+Example 4 - Print instructions on generating the CSR manually
 
 ```
 $ ./certreq.py -m -k key1.pem -cn www.example.com -e 'admin@example.com' -o 'Example Co' -l 'New York' -s NY -c US -san www.example.com,apps.example.com -ou External -ou WWW

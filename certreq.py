@@ -210,9 +210,9 @@ else:
 	cfgfile.close()
 	logger.debug("Wrote OpenSSL Config to "+cfgfilename.name)
 if arglist["n"]:
-	sslcmd="openssl req -text -config %s -keyout %s -newkey %s -new"%(cfgfilename.name,arglist["n"][0],arglist["n"][1])
+	sslcmd="openssl req -config %s -keyout %s -newkey %s -new"%(cfgfilename.name,arglist["n"][0],arglist["n"][1])
 else:
-	sslcmd="openssl req -text -config %s -key %s -new"%(cfgfilename.name,arglist["k"])
+	sslcmd="openssl req -config %s -key %s -new"%(cfgfilename.name,arglist["k"])
 if arglist["w"]:
 	sslcmd+=" -out %s"%arglist["csrfile"]
 if arglist["m"]:
